@@ -1,1 +1,1 @@
-set :client_backup_pathname, "/path/for/backups"
+set :client_backup_pathname, "/Volumes/Data/Users/nicholas/Documents/Backup/apps"  
