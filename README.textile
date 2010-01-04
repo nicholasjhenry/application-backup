@@ -1,0 +1,57 @@
+h1. Application Backup
+
+h2. Introduction
+
+Application Backup is a set of Capistrano recipes that allow you to back up applications remotely from a single client. This way you can centralize all your backup files and configuration if you are dealing with multiple applications on multiple servers.
+
+This utility backs up the database and shared folders and archives them. The utility currently keeps the last five backups.
+
+h2. Requirements
+
+* rsync
+* capistrano gem
+* capistrano-ext gem
+
+h2. Setup
+
+This utility uses the capistrano-ext gem so you can set up a different configuration files for each application to backup. Setup a configuration file in config/deploy (see example_1.rb). To set the backup path see config/deploy.rb
+
+h2. Usage
+
+To backup an application:
+
+<pre>
+  cap example_1 firsthand:backup # backs up application example_1
+  cap example_2 firsthand:backup # backs up application example_1  
+</pre>
+  
+To backup the database only:
+
+<pre>
+  cap example_1 firsthand:db:backup  
+</pre>
+
+The database backup reads the database configuration file on the production server, dumps the database, compresses, copies it to the local server and then archives it (i.e. gives it a timestamp).
+  
+To backup assets only:
+
+<pre>
+  cap example_1 firsthand:assets:backup  
+</pre> 
+
+The assets backup rsync's the shared/public folder on the production server to the local server. It then compress and archive (i.e. gives it a timestamp).
+
+h2. Scheduling Backups
+
+Use a cron job to schedule backups. You can put all the backup commands into one shell script and then run the script as a cron job rather than having individual jobs for each application.
+
+For example, backup.sh
+
+<pre>
+  #!/bin/sh
+
+  cd /path/to/application_backup
+
+  /usr/bin/cap example_1 firsthand:backup
+  /usr/bin/cap example_2 firsthand:backup
+</pre>

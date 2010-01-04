@@ -1,0 +1,1 @@
+set :client_backup_pathname, "/path/for/backups"
