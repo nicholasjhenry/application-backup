@@ -10,7 +10,7 @@ namespace :firsthand do
       system "mkdir -p #{shared_pathname}"
 
       # sync the remote directory
-      rsync_cmd = "/opt/local/bin/rsync --archive -vv --rsh=ssh"
+      rsync_cmd = "rsync --archive -vv --rsh=ssh"
       system "#{rsync_cmd} #{domain}:#{application_pathname}/shared/public/* #{full_client_backup_pathname}/shared"
 
       # archive it and back it up
