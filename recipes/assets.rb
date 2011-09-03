@@ -2,9 +2,9 @@ namespace :firsthand do
   namespace :assets do
     desc "Backup assets in the shared directory"
     task :backup do
-      full_client_backup_pathname = 
+      full_client_backup_pathname =
         File.join(client_backup_pathname, application)
-      shared_pathname             = 
+      shared_pathname             =
         File.join(full_client_backup_pathname, "shared")
 
       system "mkdir -p #{shared_pathname}"
@@ -17,7 +17,7 @@ namespace :firsthand do
       tar_filename = File.join(full_client_backup_pathname, "shared.tar")
       system "tar -cvf #{tar_filename} #{full_client_backup_pathname}/shared/"
       backup = EngineYard::Backup.new(tar_filename)
-      backup.run      
+      backup.run
     end
   end
 end
