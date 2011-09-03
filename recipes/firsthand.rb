@@ -4,15 +4,15 @@ namespace :firsthand do
     task :default do
       # ensure application backup folder exists
       #
-      full_client_backup_pathname = 
+      full_client_backup_pathname =
         File.join(client_backup_pathname, application)
-      system "mkdir -p #{full_client_backup_pathname}" 
-      
+      system "mkdir -p #{full_client_backup_pathname}"
+
       db.backup
       assets.backup
-    end    
+    end
   end
-  
+
   # Returns [database, username, password]
   #
 
@@ -27,13 +27,13 @@ namespace :firsthand do
 
     config      = ""
     run "cat #{config_file}" do |channel, out, data|
-      config = YAML.load(data)['production']    
+      config = YAML.load(data)['production']
     end
 
     [config['database'], config['username'], config['password']]
-  end  
+  end
 
   def remote_file_exist?(remote_path)
     'true' == capture("if [ -e #{remote_path} ]; then echo 'true'; fi").strip
   end
-end  
+end
