@@ -22,22 +22,22 @@ To backup an application:
 
 <pre>
   cap example_1 firsthand:backup # backs up application example_1
-  cap example_2 firsthand:backup # backs up application example_1  
+  cap example_2 firsthand:backup # backs up application example_1
 </pre>
-  
+
 To backup the database only:
 
 <pre>
-  cap example_1 firsthand:db:backup  
+  cap example_1 firsthand:db:backup
 </pre>
 
 The database backup reads the database configuration file on the production server, dumps the database, compresses, copies it to the local server and then archives it (i.e. gives it a timestamp).
-  
+
 To backup assets only:
 
 <pre>
-  cap example_1 firsthand:assets:backup  
-</pre> 
+  cap example_1 firsthand:assets:backup
+</pre>
 
 The assets backup rsync's the shared/public folder on the production server to the local server. It then compress and archive (i.e. gives it a timestamp).
 
@@ -55,3 +55,7 @@ For example, backup.sh
   /usr/bin/cap example_1 firsthand:backup
   /usr/bin/cap example_2 firsthand:backup
 </pre>
+
+h2. Note
+
+To simplify managing IP addresses I set them up in ~/.ssh/config.
